@@ -14,8 +14,11 @@ remainingSecs x = x `mod` 60
 
 --ejer 2
 f x y = 2*x-y*x
+
 g x = f(f 2 x) (f x 1)
+
 h x y z = f((f(x+2y) g 3) (5 - g z - y))
+
 i x y = if x >= y && y > 0 then x - y
-		else if 0 < x && x < y then 0
-		else y - x
+    else if 0 < x && x < y then 0
+    else y - x
