@@ -89,4 +89,14 @@ oo True _ = True
 
 --5.2 was just checking
 
---5.3
+--5.3 I do not get the exercise
+
+--Exer 6
+media :: (Fractional a) => [a] -> a
+media x =(sum x) / (len x)
+
+
+len [] = 0
+len (x:xs) = 1 + len xs
+
+--Exer 7
