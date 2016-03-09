@@ -100,3 +100,59 @@ len [] = 0
 len (x:xs) = 1 + len xs
 
 --Exer 7
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------HOJA 2-----------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+--Exer 2
+filter2:: [a] ->(a -> Bool)->(a -> Bool) -> ([a],[a])
+filter2 [] p q = ([] , [])
+filter2 (x:xs) p q 
+   | p x && q x = (x:a, x:b)
+   | p x = (x:a, b)
+   | q x = (a, x:b)
+   | otherwise = (a, b)
+   where (a,b) = filter2 xs p q
+
+
+filters:: [a] ->[(a -> Bool)]->[a]
+filters [] [] = []
+filters [] (x:xs) = []
+filters (x:xs) (y:ys)
+   | y x = x:filters xs ys
+   | otherwise = filters xs ys
+
+
+partition::(a->Bool)->[a]->([a],[a])
+partition p [] = ([] , [])
+partition p (x:xs)
+   | p x = (x:a,b)
+   | otherwise = (a,x:b)
+    where(a,b) = partition p xs
+
+
+spam::(a->Bool)->[a]->([a],[a])
+spam p [] = ([],[])
+spam p (x:xs)
+   | p x = (x:a, b)
+   |otherwise = ([],xs)
+   where(a,b) = span p xs
+
+iguales:: (Ord a1, Ord a, Enum a) => (a -> a1) -> (a -> a1) -> a -> a -> Bool
+iguales f g n m
+   | (n > m) = False
+   | (n == m) && (f n == g n) = True
+   | (f n == g n) = iguales f g (succ n) m
+   | otherwise = False
+
+cuantos:: (Integral a) =>(a->Bool)->[a]->a
+cuantos p [] = 0
+cuantos p (x:xs)
+   | p x = 1+cuantos p xs
+   | otherwise = cuantos p xs
