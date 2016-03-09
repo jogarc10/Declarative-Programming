@@ -156,3 +156,36 @@ cuantos p [] = 0
 cuantos p (x:xs)
    | p x = 1+cuantos p xs
    | otherwise = cuantos p xs
+
+{-mayoria (a->Bool)->[a]->Bool
+mayoria p [] = 
+mayoria p (x:xs) 
+   | p x-}
+
+menorA :: (Num a, Ord a) => a -> a -> (a -> Bool) -> a
+menorA n m p
+   | (n > m) = m+1
+   | (p n) = n
+   | otherwise = (menorA (n+1) m p)
+
+menor :: Num a => a -> (a -> Bool) -> a
+menor n p
+   | (p n) = n
+   | otherwise = (menor (n+1) p)
+
+mayorA :: (Num a, Ord a) => a -> a -> (a -> Bool) -> a
+mayorA n m p
+   | (n > m) = n-1
+   | (p m) = m
+   | otherwise = (mayorA n (m-1) p)
+
+mayor :: Num a => a -> (a -> Bool) -> a
+mayor n p
+   | (p n) = n
+   | otherwise = (mayor (n-1) p)
+
+ex n m p
+   | (n > m) = False
+   | p n = True
+   | otherwise = ex (n+1) m p
+
