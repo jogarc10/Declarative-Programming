@@ -184,8 +184,14 @@ mayor n p
    | (p n) = n
    | otherwise = (mayor (n-1) p)
 
+ex :: (Num a, Ord a) => a -> a -> (a -> Bool) -> Bool
 ex n m p
    | (n > m) = False
    | p n = True
    | otherwise = ex (n+1) m p
 
+pt :: (Num t, Ord t) => t -> t -> (t -> Bool) -> [t]
+pt n m p
+   | (n > m) = []
+   | p n = n:pt (n+1) m p
+   | otherwise = pt (n+1) m p
