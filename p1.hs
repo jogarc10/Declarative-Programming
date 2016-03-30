@@ -22,12 +22,14 @@ remainingSecs x = x `mod` 60
   --else y - x
 
 --2.2
-f x y = (-)((*) 2 x) ((*) y x)
-g x = f(f 2 x) (f x 1)
-h x y z = f((f((+) x 2y) g 3) ((-)((-) 5 (g z)) y))
-i x y = if x >= y && y > 0 then (-) x y
-  else if 0 < x && x < y then 0
-  else (-) y x
+--f x y = (-)((*) 2 x) ((*) y x)
+--g x = f(f 2 x) (f x 1)
+--h x y z = f((f((+) x 2y) g 3) ((-)((-) 5 (g z)) y))
+--i x y = if x >= y && y > 0 then (-) x y
+  --else if 0 < x && x < y then 0
+  --else (-) y x
+
+
 
 --ejer 3
 --3.1
@@ -282,3 +284,15 @@ pt n m p
    | (n > m) = []
    | p n = n:pt (n+1) m p
    | otherwise = pt (n+1) m p
+
+
+--Exer 3
+f n
+  | n `mod` 2 == 0 = n `div`2
+  |otherwise = 3*n + 1
+
+f' n = (length(takeWhile (>1) (iterate f n)) +1 , takeWhile (>1) (iterate f n))
+
+num_pas n = length(takeWhile (>1) (iterate f n)) +1
+
+f'' n = zip [1..n] (map num_pas [1..n])
