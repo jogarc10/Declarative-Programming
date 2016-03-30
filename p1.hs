@@ -109,6 +109,66 @@ len (x:xs) = 1 + len xs
 ------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------HOJA 2-----------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------
+--Exer 1.1
+
+sq_50 :: (Num t, Eq t) => t -> [t]
+sq_50 51 = []
+sq_50 x = x^2:sq_50(x+1)
+
+sq_50_l x = take (x+1) (map (^2) [0..])
+
+
+--Exer 1.2
+sq_50_2 51 = []
+sq_50_2 x = (x,x^2):sq_50_2(x+1)
+
+sq_50_l_2 x = zip [0..] (sq_50_l x)
+
+--exer 1.3
+pow_3 x
+   | x*3 >= (10^10) = []
+   | otherwise = (x*3):pow_3 (x*3)
+
+--Exer 1.4
+fst_pow_3 y
+   | y >= 1000 = []
+   | otherwise = (3^y):fst_pow_3(y+1)
+
+fst_pow_3_2 = take 1000 (iterate (*3) 1)
+
+fst_pow_3_3 = take 1000 (map (3^) [1..])
+
+--Exer 1.5
+sum_3_5 = sum (map mul_3_5 [1..1000])
+
+mul_3_5 x
+   | (x `mod` 3 == 0) = x
+   | (x `mod` 5 == 0) = x
+   | otherwise = 0
+
+sum_3_5_v2 = sum (filter bool_mul_3_5 [1..1000])
+
+bool_mul_3_5 x = (x `mod` 3 == 0) || (x `mod` 5 == 0)
+
+--Exer 1.6
+
+--Exer 1.7
+list_pow x
+  | x >= 10 = []
+  | otherwise = (map(^x)([1..20])):list_pow(x+1)
+
+--Exer 1.8
+list_pow_2 x
+  | x >= 10 = []
+  | otherwise = (map(x^)([1..20])):list_pow_2(x+1)
+
+--Exer 1.9
+divisor x y = ((x `mod` y) == 0) -- devuelve si y divide a x
+
+divisores x = map (divisor x) [1..(x `div` 2)]
+
+--Arreglar primo TODO
+primo x = (length (divisores x)) == 2
 
 --Exer 2
 filter2:: [a] ->(a -> Bool)->(a -> Bool) -> ([a],[a])
