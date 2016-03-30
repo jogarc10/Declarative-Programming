@@ -163,12 +163,39 @@ list_pow_2 x
   | otherwise = (map(x^)([1..20])):list_pow_2(x+1)
 
 --Exer 1.9
-divisor x y = ((x `mod` y) == 0) -- devuelve si y divide a x
+divisors n = [x | x <- [1..(n-1)], n `rem` x == 0]
 
-divisores x = map (divisor x) [1..(x `div` 2)]
+primo x = (length (divisors x)) == 1
 
---Arreglar primo TODO
-primo x = (length (divisores x)) == 2
+lower_1000_prime = filter (primo) [1..1000]
+
+--Exer 1.10
+media_1000 = (sum lower_1000_prime) `div` (length lower_1000_prime)
+
+--Exer 1.11
+num_prim_entre_200_500 = length(filter (primo) [200..500])
+
+--Exer 1.12
+first_prime_6923 (x:xs)
+   | (x > 6923) && (primo x) = x
+   |otherwise = first_prime_6923 xs
+
+--Exer 1.13
+num_and_div x
+   | x <= 50 = (x, divisors x):num_and_div(x+1)
+   |otherwise = []
+
+--Exer 1.14
+perfecto x = x == sum (divisors x)
+
+perfect_list x = filter (perfecto) [1..x]
+
+--Exer 1.15
+prime_not_next_30 x = (primo x) && (length (filter (primo) [x+1..x+30]) == 0)
+
+first_sep_prime (x:xs)
+   | prime_not_next_30 x = x
+   |otherwise = first_sep_prime xs
 
 --Exer 2
 filter2:: [a] ->(a -> Bool)->(a -> Bool) -> ([a],[a])
