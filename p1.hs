@@ -102,10 +102,39 @@ len [] = 0
 len (x:xs) = 1 + len xs
 
 --Exer 7
+last_2 (x:xs) 
+  | xs == [] = x
+  | otherwise = last_2 xs
+
+init_2 (x:xs) 
+  | xs == [] = []
+  |otherwise = x:init_2 xs
+
+initLast (x:xs) = (init_2 (x:xs), last_2 (x:xs))
+
+concat_l [] = []
+concat_l (x:xs) = x++concat_l xs
+
+take_n n [] = []
+take_n 0 _ = []
+take_n n (x:xs) = x: take_n (n-1) xs
+
+drop_n n [] = []
+drop_n 1 (x:xs) = xs
+drop_n n (x:xs) = drop_n (n-1) xs
+
+splitAt_n n (x:xs) = (take_n n (x:xs),drop_n n (x:xs))
+
+reverse_2 [] = []
+reverse_2 (x:xs) = (reverse_2 xs)++[x]
 
 
+--Exer 8 
+--La primera forma esta en el ejer anterior
 
-
+reverse_3 [] [] = []
+reverse_3 ys [] = ys
+reverse_3 ys (x:xs) = reverse_3 (x:ys) xs
 
 
 ------------------------------------------------------------------------------------------------------------------------------------
@@ -296,3 +325,25 @@ f' n = (length(takeWhile (>1) (iterate f n)) +1 , takeWhile (>1) (iterate f n))
 num_pas n = length(takeWhile (>1) (iterate f n)) +1
 
 f'' n = zip [1..n] (map num_pas [1..n])
+
+--Exer 5
+g x y = let z = f_2 x y in (z,x*y,z+1)
+g' x y = (f_2 x y, x*y, f_2 x y + 1)
+g'' x y = h x y (f_2 x y)
+h x y z = (z,x*y,z+1)
+--f_2 x y = 2*x + y
+
+
+--apartado 2
+f_2 x y = ((2*x + y)^x * y)* (x*y+y^2) -- la mas lenta es la segunda porque tiene dos llamadas a f_2 entonces si esa funcion fuera costosa seria la unica que la computaria dos veces
+
+
+--apartado 3
+f1 x y = let z = x*(y+1) in (z,x*z,z+y)
+f1_2 x y = (aux_f1 x y, x * aux_f1 x y,aux_f1 x y + y)
+aux_f1 x y = x*(y + 1)
+
+
+f2 x y = let h z = z + x in (h 3,h x, h y)
+f2_2 x y = (aux_f2 x 3, aux_f2 x x, aux_f2 x y)
+aux_f2 x z = z + x
